@@ -10,10 +10,10 @@ try {
       }
     })
     .catch(() => {
-      server = "https://struggle-mtryrc8jp-haris-baigs-projects.vercel.app";
+      server = "https://struggle-io.vercel.app";
     });
 } catch (error) {
-  server = "https://struggle-mtryrc8jp-haris-baigs-projects.vercel.app";
+  server = "https://struggle-io.vercel.app";
 }
 
 export { server };

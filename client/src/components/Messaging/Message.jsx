@@ -21,7 +21,7 @@ fetch("http://localhost:5000")
     }
   })
   .catch(() => {
-    socketUrl = "https://struggle-mtryrc8jp-haris-baigs-projects.vercel.app";
+    socketUrl = "https://struggle-io.vercel.app";
   })
   .finally(() => {
     const socket = io(socketUrl, {
