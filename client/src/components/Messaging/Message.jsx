@@ -12,7 +12,7 @@ import Loader from "../Layout/Loader";
 
 let socketUrl;
 
-fetch("http://localhost:5000/api")
+fetch("http://localhost:5000")
   .then((response) => {
     if (response.ok) {
       socketUrl = "http://localhost:5000";
@@ -21,7 +21,7 @@ fetch("http://localhost:5000/api")
     }
   })
   .catch(() => {
-    socketUrl = "https://struggle-io.vercel.app";
+    socketUrl = "https://struggle-mtryrc8jp-haris-baigs-projects.vercel.app";
   })
   .finally(() => {
     const socket = io(socketUrl, {
