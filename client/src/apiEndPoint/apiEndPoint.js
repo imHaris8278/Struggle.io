@@ -10,10 +10,10 @@ try {
       }
     })
     .catch(() => {
-      server = "https://struggle-io.vercel.app";
+      server = "https://struggle-io.vercel.app/api";
     });
 } catch (error) {
-  server = "https://struggle-io.vercel.app";
+  server = "https://struggle-io.vercel.app/api";
 }
 
 export { server };
