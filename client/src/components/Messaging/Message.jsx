@@ -10,13 +10,34 @@ import axios from "axios";
 import { server } from "../../apiEndPoint/apiEndPoint";
 import Loader from "../Layout/Loader";
 
-const socket = io("http://localhost:5000");
+let socketUrl;
+
+fetch("http://localhost:5000/api")
+  .then((response) => {
+    if (response.ok) {
+      socketUrl = "http://localhost:5000";
+    } else {
+      throw new Error("Local server not available");
+    }
+  })
+  .catch(() => {
+    socketUrl = "https://struggle-io.vercel.app";
+  })
+  .finally(() => {
+    const socket = io(socketUrl, {
+      withCredentials: true,
+    });
+
+    socket.on("connect", () => {
+      console.log("Connected to server:", socketUrl);
+    });
+  });
 
 const Message = () => {
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [input, setInput] = useState("");
-  const [searchQuery, setSearchQuery] = useState(""); // Added state for search query
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedUser, setSelectedUser] = useState(null);
   const messageEndRef = useRef(null);
   const [loading, setLoading] = useState(true);
@@ -45,12 +66,12 @@ const Message = () => {
     };
     getAllUsers();
 
-    socket.on("message", (message) => {
+    socketUrl.on("message", (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
 
     return () => {
-      socket.off("message");
+      socketUrl.off("message");
     };
   }, []);
 
@@ -77,8 +98,8 @@ const Message = () => {
         receiver: { id: selectedUser._id, role: selectedUser.role },
         content: input,
       };
-      socket.emit("sendMessage", newMessage);
-      setInput(""); // Clear input after sending
+      socketUrl.emit("sendMessage", newMessage);
+      setInput("");
     }
   };
 
