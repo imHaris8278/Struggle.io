@@ -40,6 +40,10 @@ app.use("/api", routes);
 // app.use(notFoundMiddleware);
 app.use(errorHandler);
 
+app.get("/", (req, res) => {
+  res.send("API is running....");
+});
+
 io.on("connection", (socket) => {
   console.log("New client connected");
 
