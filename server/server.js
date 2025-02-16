@@ -40,7 +40,7 @@ app.use("/api", routes);
 // app.use(notFoundMiddleware);
 app.use(errorHandler);
 
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("API is running....");
 });
 
